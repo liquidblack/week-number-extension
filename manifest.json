@@ -1,0 +1,14 @@
+{
+	"manifest_version": 2,
+	"version": "1.0",
+	"name": "Simple week number",
+	"description": "A simple week number extension with no unnecessary permissions",
+	"background": { 
+		"scripts": ["background.js"],
+		"persistent": false
+		},		
+	"browser_action": {
+		"default_icon": "icon.png",
+		"name": "Click to refresh week number"
+		}
+}
