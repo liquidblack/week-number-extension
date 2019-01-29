@@ -47,9 +47,6 @@ function draw() {
 	f.load();
 	f.loaded.then(function() {
 	  // Ready to use the font in a canvas context
-	  console.log('font ready');
-	  console.log('Trying to draw');
-	  
 	  canvas.width = 19;
 	  canvas.height = 19;
 	  context.font = "1.5em Roboto";
@@ -60,15 +57,19 @@ function draw() {
 	  context.fillText(currentWeekNumber(today), 8, 13);
 	  context.font = "0.8em Arial";
 	  context.fillText('w', 8, 2);
-	  
-	  console.log('Trying to update icon');
 	  chrome.browserAction.setIcon({
 		imageData: context.getImageData(0, 0, canvas.width,canvas.height)
 		});	
-	  console.log('Done');
 	});
 	
   }
 
+function setup() {
+	chrome.alarms.create('refresh', {delayInMinutes: 5, periodInMinutes: 5});
+	draw();
+}
+
+chrome.runtime.onStartup.addListener(setup);
+chrome.alarms.onAlarm.addListener(draw);
 chrome.browserAction.onClicked.addListener(draw);
 draw();
